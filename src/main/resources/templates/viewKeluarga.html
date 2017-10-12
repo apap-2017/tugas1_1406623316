@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View Keluarga by NKK</title>
+    </head>
+    <body>
+       	<h3 th:text="'NKK =	' + ${keluarga.nomor_kk}">NKK KELUARGA</h3>
+       	<h3 th:text="'Alamat = ' + ${keluarga.alamat}">ALAMAT KELUARGA</h3>
+       	<h3 th:text="'RT/RW = ' + ${keluarga.RT} + '/' + ${keluarga.RW}">RT/RW</h3>
+   		<h3 th:text="'Kelurahan/Desa = 	' + ${kelurahan.nama_kelurahan}">KELURAHAN</h3>
+       	<h3 th:text="'Kecamatan	= ' + ${kecamatan.nama_kecamatan}">KECAMATAN</h3>
+       	<h3 th:text="'Kota = ' + ${kota.nama_kota}">KOTA</h3>
+   		<hr/>
+   		<br/>
+   		<h3>Anggota Keluarga</h3>
+   		<br/>
+   		
+   		<table>
+			<thead>
+			  <tr>
+				<th>No</th>
+				<th>Nama Lengkap</th>
+                <th>NIK</th>
+				<th>Jenis Kelamin</th>
+				<th>Tempat Lahir</th>
+				<th>Tanggal Lahir</th>
+				<th>Agama</th>
+				<th>Pekerjaan</th>
+				<th>Status Perkawinan</th>
+				<th>Status Dalam Keluarga</th>
+				<th>Kewarganegaraan</th>			
+			 </tr>
+			</thead>
+			<tbody>
+   				<tr th:each="penduduk,iterationStatus: ${keluarga.penduduks}">
+   					<td th:text="${iterationStatus.count}">No. 1</td>
+   					<td th:text="${penduduk.nama}">Nama Penduduk</td>
+   					<td th:text="${penduduk.nik}">Nik Penduduk</td>
+   					<td th:text="${penduduk.jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan'}">Jenis Kelamin Penduduk</td>
+   					<td th:text="${penduduk.tempat_lahir}">Tempat Lahir Penduduk</td>
+   					<td th:text="${penduduk.tanggal_lahir}">Tanggal Lahir Penduduk</td>
+   					<td th:text="${penduduk.agama}">Agama Penduduk</td>
+   					<td th:text="${penduduk.pekerjaan}">Pekerjaan Penduduk</td>
+   					<td th:text="${penduduk.status_perkawinan}">Kawin Penduduk</td>
+   					<td th:text="${penduduk.status_dalam_keluarga}">Hierarki Penduduk</td>
+   					<td th:text="${penduduk.is_wni}">Kewarganegaraan Penduduk</td>
+   				</tr>
+   			</tbody>
+   		</table>
+    </body>
+</html>

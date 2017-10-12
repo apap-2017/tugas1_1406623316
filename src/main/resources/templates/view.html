@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View Penduduk by NIK</title>
+    </head>
+    <body>
+    	<h2 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h2>
+       	<h3 th:text="'NIK	' + ${penduduk.nik}">Penduduk NIK</h3>
+       	<h3 th:text="'Nama	' + ${penduduk.nama}">Penduduk Name</h3>
+       	<h3 th:text="'Tempat/Tanggal lahir	' + ${penduduk.tempat_lahir} + ',' + ${penduduk.tanggal_lahir}">Penduduk BirthDate</h3>
+       	<h3 th:text="'Alamat	' + ${keluarga.alamat}">Penduduk Alamat</h3>
+       	<h3 th:text="'RT/RW	' + ${keluarga.RT} + '/' + ${keluarga.RW}">Penduduk Religion</h3>
+       	<h3 th:text="'Kelurahan/Desa	' + ${kelurahan.nama_kelurahan}">Penduduk Religion</h3>
+       	<h3 th:text="'Kecamatan	' + ${kecamatan.nama_kecamatan}">Penduduk Religion</h3>
+       	<h3 th:text="'Kota	' + ${kota.nama_kota}">Penduduk Religion</h3>
+       	<h3 th:text="'Golongan Darah	' + ${penduduk.golongan_darah}">Penduduk Blood Type</h3>
+       	<h3 th:text="'Agama	' + ${penduduk.agama}">Penduduk Religion</h3>
+       	<h3 th:text="'Status Perkawinan	' + ${penduduk.status_perkawinan}">Penduduk Marriage Status</h3>
+       	<h3 th:text="'Pekerjaan	' + ${penduduk.pekerjaan}">Penduduk Job</h3>
+       	<h3 th:text="${penduduk.is_wni == 1 ? 'Kewarganegaraan WNI' : 'Kewarganegaraan WNA'}">Penduduk Kewarganegaraan</h3>
+       	<h3 th:text="'Status Kematian	' + ${penduduk.is_wafat == 0 ? 'Hidup' : 'Modyar'}">Penduduk Alive</h3>
+    </body>
+</html>
+

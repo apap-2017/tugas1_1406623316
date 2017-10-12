@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Add student</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1 class="page-header">Tambah Penduduk</h1>
+
+	<form action="/keluarga/tambah/submit" method="post">
+		<div>
+			<h4>Masukkan Nama</h4>
+			<label for="nama">Nama</label> <input type="text" name="nama" />
+		</div>
+		<div>
+			<h4>Tempat Lahir</h4>
+			<label for="tempat_lahir">Tempat Lahir</label> <input type="text" name="tempat_lahir" />
+		</div>
+		<div>
+			<h4>Tanggal Lahir</h4>
+			<label for="tanggal_lahir">Tanggal Lahir</label> <input type="text" name="tanggal_lahir" />
+		</div>
+		
+		<div>
+			<h4>Jenis Kelamin</h4>
+			<label for="jenis_kelamin">Jenis Kelamin</label>
+			 <select name="jenis_kelamin">
+				<option value="1">Perempuan</option>
+				<option value="0">Laki-Laki</option>
+			</select>
+		</div>
+		
+		<div>
+			<h4>Golongan Darah</h4>
+			<label for="golongan_darah">Golongan Darah</label>
+			<select name="golongan_darah">
+				<option value="A+">A+</option>
+				<option value="A-">A-</option>
+				<option value="B+">B+</option>
+				<option value="B-">B-</option>
+				<option value="O+">O+</option>
+				<option value="O-">O-</option>
+				<option value="AB+">AB+</option>
+				<option value="AB-">AB-</option>
+			</select>
+		</div>
+		<div>
+			<h4>Agama</h4>
+			<label for="agama">agama</label> <input type="text" name="agama" />
+		</div>
+		<div>
+			<h4>Status Perkawinan</h4>
+			<label for="status_perkawinan">Status Perkawinan</label>
+			<select name="status_perkawinan">
+				<option value="Kawin">Kawin</option>
+				<option value="Jomblo">Jomblo</option>
+			</select>
+			
+		</div>
+		<div>
+			<h4>Pekerjaan</h4>
+			<label for="pekerjaan">Pekerjaan</label> <input type="text" name="pekerjaan" />
+		</div>
+		<div>
+			<h4>Kewarganegaraan</h4>
+			<label for="is_wni">Kewarganegaraan</label> 
+			<select name="is_wni">
+				<option value="1">WNI</option>
+				<option value="0">WNA</option>
+			</select>
+		</div>
+		<div>
+			<h4>Status Dalam Keluarga</h4>
+			<label for="status_dalam_keluarga">Status Dalam Keluarga</label> <input type="text" name="status_dalam_keluarga" />
+		</div>
+		
+		<div>
+			<h4>Status Kematian</h4>
+			<label for="is_wafat">Status Kematian</label> 
+			<select name="is_wafat">
+				<option value="0">Hidup</option>
+				<option value="1">Modar</option>
+			</select>
+		</div>
+		<div>
+			<h4>Id Keluarga</h4>
+			<label for="id_keluarga">Id Keluarga</label> <input type="text" name="id_keluarga" />
+		</div>
+		<hr/>
+		<br/>
+		<div>
+			<button type="submit" name="action" value="save">Save</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
+
