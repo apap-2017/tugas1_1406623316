@@ -93,4 +93,41 @@ public interface PendudukMapper {
 	
 	@Select("SELECT MAX(id)+1 FROM penduduk")
 	String setIdPenduduk();
+
+	@Select("SELECT id FROM kelurahan WHERE nama_kelurahan LIKE #{nama_kelurahan2}")
+	String setKelurahanNama(@Param("nama_kelurahan2") String nama_kelurahan2);
+
+	@Select("SELECT id_kecamatan FROM kelurahan WHERE id = #{id_kelurahan}")
+	String setKecamatanIdKelurahan(@Param("id_kelurahan") String id_kelurahan);
+	
+	@Select("select nomor_kk from keluarga where nomor_kk LIKE #{halfNKK} ORDER BY nomor_kk DESC LIMIT 1")
+	String selectNkkAvail(@Param("halfNKK")String halfNKK);
+	
+	@Select("SELECT MAX(id)+1 FROM keluarga")
+	String setIdKeluarga();
+
+	@Insert("insert into keluarga (alamat,RT,RW,id_kelurahan,nomor_kk,id) values ("+
+			"#{alamat},#{RT},#{RW},#{id_kelurahan2},#{nkk},#{id})")
+	void addKeluarga(@Param("alamat") String alamat, 
+					 @Param("RT") String RT,
+					 @Param("RW") String RW,
+					 @Param("id_kelurahan2") int id_kelurahan2,
+					 @Param("nkk") String nkk,
+					 @Param("id") String id);
+	
+	@Update("UPDATE penduduk SET nama=#{nama}, nik=#{nik}, tempat_lahir=#{tempat_lahir}, tanggal_lahir=#{tanggal_lahir}, " +
+			"jenis_kelamin=#{jenis_kelamin}, is_wni=#{is_wni}, id_keluarga=#{id_keluarga}, agama=#{agama}, pekerjaan=#{pekerjaan}, " + 
+			"status_perkawinan=#{status_perkawinan}, status_dalam_keluarga=#{status_dalam_keluarga}, golongan_darah=#{golongan_darah}, " + 
+			"is_wafat=#{is_wafat} WHERE id=#{id}")
+	void updatePenduduk(PendudukModel penduduk2);
+	
+	@Select("select nama_kelurahan from kelurahan where id = #{id_kelurahan}")
+	String cekNamaKelurahan(@Param("id_kelurahan") String id_kelurahan);
+	
+	@Update("update penduduk set nik = #{nik} where id=#{id}")
+	void updateNIK(@Param("nik") String nik, @Param("id") String id);
+	
+	@Update("update keluarga set nomor_kk=#{nomor_kk}, alamat=#{alamat}, RT=#{RT}, RW=#{RW}, id_kelurahan=#{id_kelurahan} "+ 
+			"where id=#{id}")
+	void updateKeluarga(KeluargaModel keluarga2);
 }

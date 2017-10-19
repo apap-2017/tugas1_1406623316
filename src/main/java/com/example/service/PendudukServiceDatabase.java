@@ -1,5 +1,8 @@
 package com.example.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,7 +85,7 @@ public class PendudukServiceDatabase implements PendudukService {
 		
 		String bulan = date[1];
 		String tahun = date[0].substring(2,4);
-		String halfNIK = "'31" + idKota + idKecamatan + tanggal + bulan + tahun + "%'";
+		String halfNIK = "31" + idKota + idKecamatan + tanggal + bulan + tahun + "%";
 		System.out.println(halfNIK);
 		String nikAvail = pendudukMapper.selectNikAvail(halfNIK);
 		if(nikAvail != null) {
@@ -117,6 +120,84 @@ public class PendudukServiceDatabase implements PendudukService {
 	@Override
 	public String setIdPenduduk() {
 		return pendudukMapper.setIdPenduduk();
+	}
+
+	@Override
+	public String setDate() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
+		String date = dtf.format(localDate);
+		return date;
+	}
+
+	@Override
+	public String setKelurahanNama(String nama_kelurahan) {
+		String nama_kelurahan2 = "%" + nama_kelurahan + "%";
+		return pendudukMapper.setKelurahanNama(nama_kelurahan2);
+	}
+
+	@Override
+	public String setKecamatanIdKelurahan(String id_kelurahan) {
+		return pendudukMapper.setKecamatanIdKelurahan(id_kelurahan);
+	}
+
+	@Override
+	public String setNkk(String date, String idKecamatan, String idKota) {
+		String[] date2 = date.split("/");
+		String tahun = date2[0].substring(2,4);
+		String bulan = date2[1];
+		String tanggal = date2[2];
+		String halfNKK = "31" + idKota + idKecamatan + tanggal + bulan + tahun + "%";
+		System.out.println(halfNKK);
+		String nkkAvail = pendudukMapper.selectNkkAvail(halfNKK);
+		if(nkkAvail != null) {
+			System.out.println(nkkAvail);
+			Long nkk1 = Long.parseLong(nkkAvail);
+			nkk1 = nkk1 + 1;
+			String nkkFinal = Long.toString(nkk1);
+			System.out.println(nkkFinal);
+			return nkkFinal;
+		} else {
+			String nkkFinal = "31" + idKota + idKecamatan + tanggal + bulan + tahun + "0001";
+			System.out.println(nkkFinal);
+			return nkkFinal;
+		}
+	}
+
+	@Override
+	public String setIdKeluarga() {
+		return pendudukMapper.setIdKeluarga();
+	}
+
+	@Override
+	public void addKeluarga(String alamat, String RT, String RW, int id_kelurahan2, String nkk, String id) {
+		// TODO Auto-generated method stub
+		pendudukMapper.addKeluarga(alamat,RT,RW,id_kelurahan2,nkk,id);
+		
+	}
+
+	@Override
+	public void updatePenduduk(PendudukModel penduduk2) {
+		// TODO Auto-generated method stub
+		pendudukMapper.updatePenduduk(penduduk2);
+	}
+
+	@Override
+	public String cekNamaKelurahan(String id_kelurahan) {
+		// TODO Auto-generated method stub
+		return pendudukMapper.cekNamaKelurahan(id_kelurahan);
+	}
+
+	@Override
+	public void updateNIK(String nik, String id) {
+		// TODO Auto-generated method stub
+		pendudukMapper.updateNIK(nik,id);
+	}
+
+	@Override
+	public void updateKeluarga(KeluargaModel keluarga2) {
+		// TODO Auto-generated method stub
+		pendudukMapper.updateKeluarga(keluarga2);
 	}
 
 	

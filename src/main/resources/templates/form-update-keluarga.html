@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Update keluarga</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1 class="page-header">Update</h1>
+
+	<form action="/keluarga/ubah/submit" th:object="${keluarga}" method="post">
+		<div>
+			<label for="id">ID</label> <input type="text" name="id" readonly="true" th:field="*{id}"/>
+		</div>
+		<div>
+			<label for="nomor_kk">NKK</label> <input type="text" name="nomor_kk" readonly="true" th:field="*{nomor_kk}"/>
+		</div>
+		<div>
+			<label for="alamat">Alamat</label> <input type="text" name="alamat" th:field="*{alamat}"/>
+		</div>
+		<div>
+			<label for="RT">RT</label> <input type="text" name="RT" th:field="*{RT}"/>
+		</div>
+		<div>
+			<label for="RW">RW</label> <input type="text" name="RW" th:field="*{RW}"/>
+		</div>
+		<div>
+			<label for="nama_kelurahan">Kelurahan/Desa</label> <input type="text" name="nama_kelurahan" th:value="${namaKelurahan}"/>
+		</div>
+		<div>
+			<button type="submit" name="action" value="save">Save</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
+

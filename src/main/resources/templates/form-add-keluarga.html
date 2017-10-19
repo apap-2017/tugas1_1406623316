@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Add student</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1 class="page-header">Tambah Keluarga</h1>
+	
+	<form action="/keluarga/tambah/submit" method="post">
+		<div>
+			<h4>Alamat</h4>
+			<label for="alamat">Alamat</label> <input type="text" name="alamat" />
+		</div>
+		<div>
+			<h4>RT</h4>
+			<label for="RT">RT</label> <input type="text" name="RT" />
+		</div>
+		<div>
+			<h4>RW</h4>
+			<label for="RW">RW</label> <input type="text" name="RW" />
+		</div>
+		<div>
+			<h4>Kelurahan/Desa</h4>
+			<label for="nama_kelurahan">Kelurahan/Desa</label> <input type="text" name="nama_kelurahan" />
+		</div>
+		<hr/>
+		<br/>
+		<div>
+			<button type="submit" name="action" value="save">Save</button>
+		</div>
+	</form>
+
+</body>
+</html>
