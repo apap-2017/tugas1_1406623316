@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KecamatanModel {
 	private String id, id_kota, kode_kecamatan, nama_kecamatan;
+	private List<KelurahanModel> kelurahans; 
 }

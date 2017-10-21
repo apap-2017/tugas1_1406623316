@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import com.example.model.KecamatanModel;
 import com.example.model.KeluargaModel;
 import com.example.model.KelurahanModel;
@@ -24,5 +26,18 @@ public interface PendudukService {
 			String id_keluarga, String nik);
 	
 	String setIdPenduduk();
+	String setDate();
+	String setKelurahanNama(String nama_kelurahan);
+	String setKecamatanIdKelurahan(String id_kelurahan);
+	String setNkk(String date, String idKecamatan, String idKota);
+	String setIdKeluarga();
+	void addKeluarga(String alamat, String RT, String RW, int id_kelurahan2, String nkk, String id);
+	void updatePenduduk(PendudukModel penduduk2);
+	String cekNamaKelurahan(String id_kelurahan);
+	void updateNIK(String nik, String id);
+	void updateKeluarga(KeluargaModel keluarga2);
+	List<KeluargaModel> setKeluarga(KelurahanModel kelurahan);
+	List<PendudukModel> selectPenduduks2(String kl);
+	
 	
 }

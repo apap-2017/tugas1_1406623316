@@ -29,19 +29,70 @@ public interface PendudukMapper {
 	
 	@Select("select id, nomor_kk, alamat, RT, RW, id_kelurahan, is_tidak_berlaku " +
 			"from keluarga where id = #{id}")
+	@Results(value = {
+    		@Result(property="id", column="id"),
+    		@Result(property="nomor_kk", column="nomor_kk"),
+    		@Result(property="alamat", column="alamat"),
+    		@Result(property="RT", column="RT"),
+    		@Result(property="RW", column="RW"),
+    		@Result(property="id_kelurahan", column="id_kelurahan"),
+    		@Result(property="is_tidak_berlaku", column="is_tidak_berlaku"),
+    		@Result(property="penduduks", column="id",
+    		javaType = List.class,
+    		many=@Many(select="selectPenduduks"))
+    })
 	KeluargaModel selectKeluargaId(@Param("id") String id);
 
 	@Select("select id, id_kecamatan, kode_kelurahan, nama_kelurahan, kode_pos " + 
 			"from kelurahan where id = #{id}")	
+	@Results(value= {
+			@Result(property="id", column="id"),
+			@Result(property="id_kecamatan", column="id_kecamatan"),
+			@Result(property="kode_kelurahan", column="kode_kelurahan"),
+			@Result(property="nama_kelurahan", column="nama_kelurahan"),
+			@Result(property="kode_pos", column="kode_pos"),
+			@Result(property="keluargas", column="id", 
+			javaType = List.class,
+			many=@Many(select="selectKeluargas"))
+	})
 	KelurahanModel selectKelurahanId(@Param("id") String id);
+	
+	@Select("select id, nomor_kk, alamat, RT, RW, id_kelurahan, is_tidak_berlaku " +
+			"from keluarga where id_kelurahan = #{id_kelurahan}")
+	List<KeluargaModel> selectKeluargas(@Param("id_kelurahan") String id_kelurahan);
 	
 	@Select("select id, id_kota, kode_kecamatan, nama_kecamatan " + 
 			"from kecamatan where id = #{id}")
+	@Results(value= {
+			@Result(property="id", column="id"),
+			@Result(property="id_kota", column="id_kota"),
+			@Result(property="kode_kecamatan", column="kode_kecamatan"),
+			@Result(property="nama_kecamatan", column="nama_kecamatan"), 
+			@Result(property="kelurahans", column="id", 
+			javaType = List.class,
+			many=@Many(select="selectKelurahans"))
+	})
 	KecamatanModel selectKecamatanId (@Param("id") String id);
+	
+	@Select("select id, id_kecamatan, kode_kelurahan, nama_kelurahan, kode_pos " + 
+			"from kelurahan where id_kecamatan = #{id_kecamatan}")
+	List<KelurahanModel> selectKelurahans (@Param("id_kecamatan") String id_kecamatan);
 	
 	@Select("select id, kode_kota, nama_kota " + 
 			"from kota where id = #{id}")
+	@Results(value = {
+			@Result(property="id", column="id"),
+			@Result(property="kode_kota", column="kode_kota"),
+			@Result(property="nama_kota", column="nama_kota"),
+			@Result(property="kecamatans", column="id", 
+			javaType = List.class,
+			many=@Many(select="selectKecamatans"))
+	})
 	KotaModel selectKotaId (@Param("id") String id);
+	
+	@Select("select id, id_kota, kode_kecamatan, nama_kecamatan " + 
+			"from kecamatan where id_kota = #{id_kota}")
+	List<KecamatanModel> selectKecamatans(@Param("id_kota") String id_kota);
 	
 	@Select("select id, nomor_kk, alamat, RT, RW, id_kelurahan, is_tidak_berlaku " +
 			"from keluarga where nomor_kk = #{nkk}")
@@ -64,6 +115,9 @@ public interface PendudukMapper {
 			"golongan_darah, tanggal_lahir from penduduk where id_keluarga = #{id_keluarga}")
 	List<PendudukModel> selectPenduduks(@Param("id_keluarga") String id_keluarga);
 	
+	@Select("SELECT * from penduduk where id_keluarga IN (select id from keluarga where id_kelurahan = #{id_kelurahan})")
+	List<PendudukModel> selectPenduduks2(@Param("id_kelurahan") String id_kelurahan);
+
 	@Select("SELECT id_kecamatan from kelurahan WHERE id IN (SELECT id_kelurahan as id from keluarga where id = #{id_keluarga})")
 	String selectIdKecamatan(@Param("id_keluarga") String id_keluarga);
 	
@@ -93,4 +147,42 @@ public interface PendudukMapper {
 	
 	@Select("SELECT MAX(id)+1 FROM penduduk")
 	String setIdPenduduk();
+
+	@Select("SELECT id FROM kelurahan WHERE nama_kelurahan LIKE #{nama_kelurahan2}")
+	String setKelurahanNama(@Param("nama_kelurahan2") String nama_kelurahan2);
+
+	@Select("SELECT id_kecamatan FROM kelurahan WHERE id = #{id_kelurahan}")
+	String setKecamatanIdKelurahan(@Param("id_kelurahan") String id_kelurahan);
+	
+	@Select("select nomor_kk from keluarga where nomor_kk LIKE #{halfNKK} ORDER BY nomor_kk DESC LIMIT 1")
+	String selectNkkAvail(@Param("halfNKK")String halfNKK);
+	
+	@Select("SELECT MAX(id)+1 FROM keluarga")
+	String setIdKeluarga();
+
+	@Insert("insert into keluarga (alamat,RT,RW,id_kelurahan,nomor_kk,id) values ("+
+			"#{alamat},#{RT},#{RW},#{id_kelurahan2},#{nkk},#{id})")
+	void addKeluarga(@Param("alamat") String alamat, 
+					 @Param("RT") String RT,
+					 @Param("RW") String RW,
+					 @Param("id_kelurahan2") int id_kelurahan2,
+					 @Param("nkk") String nkk,
+					 @Param("id") String id);
+	
+	@Update("UPDATE penduduk SET nama=#{nama}, nik=#{nik}, tempat_lahir=#{tempat_lahir}, tanggal_lahir=#{tanggal_lahir}, " +
+			"jenis_kelamin=#{jenis_kelamin}, is_wni=#{is_wni}, id_keluarga=#{id_keluarga}, agama=#{agama}, pekerjaan=#{pekerjaan}, " + 
+			"status_perkawinan=#{status_perkawinan}, status_dalam_keluarga=#{status_dalam_keluarga}, golongan_darah=#{golongan_darah}, " + 
+			"is_wafat=#{is_wafat} WHERE id=#{id}")
+	void updatePenduduk(PendudukModel penduduk2);
+	
+	@Select("select nama_kelurahan from kelurahan where id = #{id_kelurahan}")
+	String cekNamaKelurahan(@Param("id_kelurahan") String id_kelurahan);
+	
+	@Update("update penduduk set nik = #{nik} where id=#{id}")
+	void updateNIK(@Param("nik") String nik, @Param("id") String id);
+	
+	@Update("update keluarga set nomor_kk=#{nomor_kk}, alamat=#{alamat}, RT=#{RT}, RW=#{RW}, id_kelurahan=#{id_kelurahan} "+ 
+			"where id=#{id}")
+	void updateKeluarga(KeluargaModel keluarga2);
+	
 }

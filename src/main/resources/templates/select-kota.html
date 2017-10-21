@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Tampilkan List Keluarga</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1 class="page-header">Tampilkan List Keluarga</h1>
+
+	<form action="/penduduk/cari" method="get" >
+		<div>
+			<label for="kt">Pilih Kota</label> 
+				<select name = "kt">
+					<option value="1">Kabupatan Kepulauan Seribu</option>
+					<option value="2">Kota Jakarta Selatan</option>
+					<option value="3">Kota Jakarta Timur</option>
+					<option value="4">Kota Jakarta Pusat</option>
+					<option value="5">Kota Jakarta Barat</option>
+					<option value="6">Kota Jakarta Utara</option>
+				</select>
+		</div>
+
+		<div>
+			<button type="submit" >Lihat</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
+
+

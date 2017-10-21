@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+	
+	<title>Tampilkan List Penduduk</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	
+	<body>
+		<h2 th:text="'Lihat Data Penduduk Di Kota ' + ${kota.nama_kota} + ', Kecamatan ' + ${kecamatan.nama_kecamatan} + ', Kelurahan ' + ${kelurahan.nama_kelurahan}"  ></h2>
+		<table>
+			<thead>
+			  <tr>
+				<th>Nama Lengkap</th>
+                <th>NIK</th>
+				<th>Jenis Kelamin</th>		
+			 </tr>
+			</thead>
+			<tbody>
+   				<tr th:each="penduduk,iterationStatus: ${penduduks}">
+   					<td th:text="${penduduk.nama}">Nama Penduduk</td>
+   					<td th:text="${penduduk.nik}">Nik Penduduk</td>
+   					<td th:text="${penduduk.jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan'}">Jenis Kelamin Penduduk</td>
+   				</tr>
+   			</tbody>
+		</table>
+	</body>
+
+</html>
+
+

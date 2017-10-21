@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -14,23 +15,12 @@ public class PendudukModel {
 	private String id, nik, nama, tempat_lahir, id_keluarga, agama, pekerjaan, status_perkawinan, status_dalam_keluarga, golongan_darah; 
 	private int is_wni,jenis_kelamin,is_wafat;
 	private String tanggal_lahir;
-	private String is_wni2,is_wafat2;
 	
-	public void changeWNI() {
-		if(is_wni == 1) {
-			is_wni2 = "WNI";
-		} else {
-			is_wni2 = "WNA";
-		}
-	}
-	
-	public void statusWafat() {
-		if(is_wafat == 0) {
-			is_wafat2 = "Still Alive and Kickin'";
-		} else {
-			is_wafat2 = "Modyar";
-		}
-	}
-	
+}
 
+class PendudukComparatorByAge implements Comparator<PendudukModel> {
+    @Override
+    public int compare(PendudukModel o1, PendudukModel o2) {
+        return o1.getTanggal_lahir().compareTo(o2.getTanggal_lahir());
+    }
 }
