@@ -317,6 +317,7 @@ public class PendudukController
 
     	return "success-update-keluarga";
     }
+<<<<<<< HEAD
     
     
     @RequestMapping("/penduduk/cari")
@@ -357,4 +358,6 @@ public class PendudukController
     }
     
     
+=======
+>>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
 }

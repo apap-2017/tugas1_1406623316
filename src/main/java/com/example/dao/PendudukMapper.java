@@ -184,5 +184,8 @@ public interface PendudukMapper {
 	@Update("update keluarga set nomor_kk=#{nomor_kk}, alamat=#{alamat}, RT=#{RT}, RW=#{RW}, id_kelurahan=#{id_kelurahan} "+ 
 			"where id=#{id}")
 	void updateKeluarga(KeluargaModel keluarga2);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
 }
