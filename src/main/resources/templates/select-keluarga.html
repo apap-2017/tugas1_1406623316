@@ -1,16 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" >
-
 	<head>
-	
-	<title>Tampilkan List Penduduk</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Tampilkan List Penduduk</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<div th:replace="fragments/fragment :: links"></div>
+		<script>
+			$(document).ready( function () {
+		    	$('#table_id').DataTable();
+			} );
+		</script>
 	</head>
 	
 	<body>
+		<div th:replace="fragments/fragment :: header"> </div>
 		<h2 th:text="'Lihat Data Penduduk Di Kota ' + ${kota.nama_kota} + ', Kecamatan ' + ${kecamatan.nama_kecamatan} + ', Kelurahan ' + ${kelurahan.nama_kelurahan}"  ></h2>
-		<table>
+		<table id="table_id" class="display">
 			<thead>
 			  <tr>
 				<th>Nama Lengkap</th>
@@ -26,6 +31,8 @@
    				</tr>
    			</tbody>
 		</table>
+		
+		<div th:replace="fragments/fragment :: footer"> </div>
 	</body>
 
 </html>

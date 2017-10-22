@@ -28,9 +28,15 @@ public class PendudukController
 
 
     @RequestMapping("/")
-    public String index ()
+    public String lihatData ()
     {
         return "lihat-data";
+    }
+    
+    @RequestMapping("/index")
+    public String index ()
+    {
+        return "index";
     }
 
 
@@ -159,6 +165,7 @@ public class PendudukController
     public String pendudukViewPath (Model model,
             @PathVariable(value = "nik") String nik)
     {
+    	System.out.println(nik);
     	PendudukModel penduduk = pendudukDAO.selectPenduduk (nik);
         KeluargaModel keluarga = pendudukDAO.selectKeluargaId(penduduk.getId_keluarga());
         KelurahanModel kelurahan = pendudukDAO.selectKelurahanId(keluarga.getId_kelurahan());

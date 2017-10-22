@@ -1,8 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Index</title>
+		<div th:replace="fragments/fragment :: links"></div>
 	</head>
 	<body>
-		<h2>Welcome To Tugas 1 APAP</h2>
+		<div th:replace="fragments/fragment :: header"> </div>
+		<h2> Welcome To Tugas 1 APAP </h2>
+		<div th:replace="fragments/fragment :: footer"> </div>
 	</body>
 </html>

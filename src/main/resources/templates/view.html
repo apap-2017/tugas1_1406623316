@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>View Penduduk by NIK</title>
+        <div th:replace="fragments/fragment :: links"></div>
     </head>
     <body>
-    	
+    	<div th:replace="fragments/fragment :: header"> </div>
     	<h2 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h2>
        	<h3 th:text="'NIK	' + ${penduduk.nik}">Penduduk NIK</h3>
        	<h3 th:text="'Nama	' + ${penduduk.nama}">Penduduk Name</h3>
@@ -29,6 +30,7 @@
 				<button th:if="${penduduk.is_wafat==0}" type="submit" name="action" value="submit">NON AKTIFKAN </button>
 			</div>
 	    </form>
+	    <div th:replace="fragments/fragment :: footer"> </div>
      </body>
 </html>
 

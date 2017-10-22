@@ -2,20 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>View Keluarga by NKK</title>
+        <div th:replace="fragments/fragment :: links"></div>
+		<script>
+			$(document).ready( function () {
+		    	$('#table_id').DataTable();
+			} );
+		</script>
     </head>
     <body>
-       	<h3 th:text="'NKK =	' + ${keluarga.nomor_kk}">NKK KELUARGA</h3>
-       	<h3 th:text="'Alamat = ' + ${keluarga.alamat}">ALAMAT KELUARGA</h3>
-       	<h3 th:text="'RT/RW = ' + ${keluarga.RT} + '/' + ${keluarga.RW}">RT/RW</h3>
-   		<h3 th:text="'Kelurahan/Desa = 	' + ${kelurahan.nama_kelurahan}">KELURAHAN</h3>
-       	<h3 th:text="'Kecamatan	= ' + ${kecamatan.nama_kecamatan}">KECAMATAN</h3>
-       	<h3 th:text="'Kota = ' + ${kota.nama_kota}">KOTA</h3>
+    	
+    	<div th:replace="fragments/fragment :: header"> </div>
+       	<hr/>
+   		<br/>
+       	<h4 th:text="'NKK =	' + ${keluarga.nomor_kk}">NKK KELUARGA</h4>
+       	<h4 th:text="'Alamat = ' + ${keluarga.alamat}">ALAMAT KELUARGA</h4>
+       	<h4 th:text="'RT/RW = ' + ${keluarga.RT} + '/' + ${keluarga.RW}">RT/RW</h4>
+   		<h4 th:text="'Kelurahan/Desa = 	' + ${kelurahan.nama_kelurahan}">KELURAHAN</h4>
+       	<h4 th:text="'Kecamatan	= ' + ${kecamatan.nama_kecamatan}">KECAMATAN</h4>
+       	<h4 th:text="'Kota = ' + ${kota.nama_kota}">KOTA</h4>
    		<hr/>
    		<br/>
    		<h3>Anggota Keluarga</h3>
    		<br/>
    		
-   		<table>
+   		<table id="table_id" class="display">
 			<thead>
 			  <tr>
 				<th>No</th>
@@ -47,5 +57,6 @@
    				</tr>
    			</tbody>
    		</table>
+   		<div th:replace="fragments/fragment :: footer"> </div>
     </body>
 </html>

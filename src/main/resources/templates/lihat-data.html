@@ -1,8 +1,10 @@
 <html>
 	<head>
 		<title>Sistem Informasi Kependudukan</title>
+		<div th:replace="fragments/fragment :: links"></div>
 	</head>
 	<body>
+		<div th:replace="fragments/fragment :: header"> </div>
 		<h2>Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h2>
 		<h4>Welcome To Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h4>	
 		<hr/>
@@ -26,5 +28,6 @@
 				<button type="submit">Lihat</button>
 			</div>
 		</form>
+		<div th:replace="fragments/fragment :: footer"> </div>
 	</body>
 </html>
