@@ -36,11 +36,8 @@ public interface PendudukService {
 	String cekNamaKelurahan(String id_kelurahan);
 	void updateNIK(String nik, String id);
 	void updateKeluarga(KeluargaModel keluarga2);
-<<<<<<< HEAD
 	List<KeluargaModel> setKeluarga(KelurahanModel kelurahan);
 	List<PendudukModel> selectPenduduks2(String kl);
-	
-=======
->>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
-	
+	void updateKematianPenduduk(PendudukModel penduduk);
+	List<PendudukModel> cekIsTidakBerlaku(List<PendudukModel> penduduks);	
 }

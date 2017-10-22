@@ -24,7 +24,7 @@ public interface PendudukMapper {
 	
 	@Select("select id, nik, nama, tempat_lahir, id_keluarga, " + 
 			"agama, pekerjaan, status_perkawinan, status_dalam_keluarga, " + 
-			"golongan_darah, tanggal_lahir from penduduk where nik = #{nik}")
+			"golongan_darah, tanggal_lahir, is_wni,jenis_kelamin,is_wafat from penduduk where nik = #{nik}")
     PendudukModel selectPenduduk (@Param("nik") String nik);
 	
 	@Select("select id, nomor_kk, alamat, RT, RW, id_kelurahan, is_tidak_berlaku " +
@@ -110,9 +110,7 @@ public interface PendudukMapper {
     })
 	KeluargaModel selectKeluargaNkk(@Param("nkk") String nkk);
 	
-	@Select("select id, nik, nama, tempat_lahir, jenis_kelamin, " + 
-			"agama, pekerjaan, status_perkawinan, status_dalam_keluarga, " + 
-			"golongan_darah, tanggal_lahir from penduduk where id_keluarga = #{id_keluarga}")
+	@Select("select * from penduduk where id_keluarga = #{id_keluarga}")
 	List<PendudukModel> selectPenduduks(@Param("id_keluarga") String id_keluarga);
 	
 	@Select("SELECT * from penduduk where id_keluarga IN (select id from keluarga where id_kelurahan = #{id_kelurahan})")
@@ -184,8 +182,7 @@ public interface PendudukMapper {
 	@Update("update keluarga set nomor_kk=#{nomor_kk}, alamat=#{alamat}, RT=#{RT}, RW=#{RW}, id_kelurahan=#{id_kelurahan} "+ 
 			"where id=#{id}")
 	void updateKeluarga(KeluargaModel keluarga2);
-<<<<<<< HEAD
-	
-=======
->>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
+
+	@Update("update penduduk set is_wafat = 1 where nik = #{nik}")
+	void updateKematianPenduduk(PendudukModel penduduk);
 }

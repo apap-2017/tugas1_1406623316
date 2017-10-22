@@ -43,7 +43,7 @@
    					<td th:text="${penduduk.pekerjaan}">Pekerjaan Penduduk</td>
    					<td th:text="${penduduk.status_perkawinan}">Kawin Penduduk</td>
    					<td th:text="${penduduk.status_dalam_keluarga}">Hierarki Penduduk</td>
-   					<td th:text="${penduduk.is_wni}">Kewarganegaraan Penduduk</td>
+   					<td th:text="${penduduk.is_wni == 1 ? 'WNI' : 'WNA'}">Kewarganegaraan Penduduk</td>
    				</tr>
    			</tbody>
    		</table>

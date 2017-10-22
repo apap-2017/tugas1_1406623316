@@ -4,6 +4,7 @@
         <title>View Penduduk by NIK</title>
     </head>
     <body>
+    	
     	<h2 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h2>
        	<h3 th:text="'NIK	' + ${penduduk.nik}">Penduduk NIK</h3>
        	<h3 th:text="'Nama	' + ${penduduk.nama}">Penduduk Name</h3>
@@ -17,8 +18,17 @@
        	<h3 th:text="'Agama	' + ${penduduk.agama}">Penduduk Religion</h3>
        	<h3 th:text="'Status Perkawinan	' + ${penduduk.status_perkawinan}">Penduduk Marriage Status</h3>
        	<h3 th:text="'Pekerjaan	' + ${penduduk.pekerjaan}">Penduduk Job</h3>
-       	<h3 th:text="${penduduk.is_wni == 1 ? 'Kewarganegaraan WNI' : 'Kewarganegaraan WNA'}">Penduduk Kewarganegaraan</h3>
-       	<h3 th:text="'Status Kematian	' + ${penduduk.is_wafat == 0 ? 'Hidup' : 'Modyar'}">Penduduk Alive</h3>
-    </body>
+       	<h3 th:text="'Kewarganegaraan ' + ${penduduk.is_wni == 1 ? 'WNI' : 'WNA'}">Penduduk Kewarganegaraan</h3>
+       	<h3 th:text="'Status Kematian	' + ${penduduk.is_wafat == 0 ? 'Hidup' : 'Meninggal'}">Penduduk Alive</h3>
+     	
+     	<form action="/penduduk/mati" method="post">
+	    	<div>
+	    		<input type="hidden" name="nik" th:value="${penduduk.nik}"/>
+	    	</div>
+	    	<div>
+				<button th:if="${penduduk.is_wafat==0}" type="submit" name="action" value="submit">NON AKTIFKAN </button>
+			</div>
+	    </form>
+     </body>
 </html>
 

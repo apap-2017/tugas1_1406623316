@@ -30,7 +30,7 @@ public class PendudukController
     @RequestMapping("/")
     public String index ()
     {
-        return "index";
+        return "lihat-data";
     }
 
 
@@ -131,17 +131,17 @@ public class PendudukController
     }
 
 
-    @RequestMapping("/penduduk/view")
+    @RequestMapping("/penduduk")
     public String pendudukView (Model model,
             @RequestParam(value = "nik", required = false) String nik)
     {
         PendudukModel penduduk = pendudukDAO.selectPenduduk (nik);
-        KeluargaModel keluarga = pendudukDAO.selectKeluargaId(penduduk.getId_keluarga());
-        KelurahanModel kelurahan = pendudukDAO.selectKelurahanId(keluarga.getId_kelurahan());
-        KecamatanModel kecamatan = pendudukDAO.selectKecamatanId(kelurahan.getId_kecamatan());
-        KotaModel kota = pendudukDAO.selectKotaId(kecamatan.getId_kota());
         
         if (penduduk != null) {
+        	KeluargaModel keluarga = pendudukDAO.selectKeluargaId(penduduk.getId_keluarga());
+            KelurahanModel kelurahan = pendudukDAO.selectKelurahanId(keluarga.getId_kelurahan());
+            KecamatanModel kecamatan = pendudukDAO.selectKecamatanId(kelurahan.getId_kecamatan());
+            KotaModel kota = pendudukDAO.selectKotaId(kecamatan.getId_kota());
         	model.addAttribute ("penduduk", penduduk);
             model.addAttribute("keluarga", keluarga);
             model.addAttribute("kelurahan", kelurahan);
@@ -155,7 +155,7 @@ public class PendudukController
     }
     
 
-    @RequestMapping("/penduduk/view/{nik}")
+    @RequestMapping("/penduduk/{nik}")
     public String pendudukViewPath (Model model,
             @PathVariable(value = "nik") String nik)
     {
@@ -188,11 +188,16 @@ public class PendudukController
         KotaModel kota = pendudukDAO.selectKotaId(kecamatan.getId_kota());
     	
     	if (keluarga != null) {
-            model.addAttribute ("keluarga", keluarga);
+    		keluarga.setPenduduks(pendudukDAO.cekIsTidakBerlaku(keluarga.getPenduduks()));
+    		model.addAttribute("keluarga", keluarga);
             model.addAttribute("kelurahan", kelurahan);
             model.addAttribute("kecamatan", kecamatan);
             model.addAttribute("kota", kota);
-            return "viewKeluarga";
+            if(keluarga.getPenduduks() == null) {
+            	return "keluarga-tidak-berlaku";
+            } else {
+            	return "viewKeluarga";
+            }
         } else {
             model.addAttribute ("nkk", nkk);
             return "KeluargaNotFound";
@@ -269,7 +274,7 @@ public class PendudukController
     		return "form-update-keluarga";
     	} else {
     		model.addAttribute("nkk",nkk);
-    		return "keluarga-not-found";
+    		return "KeluargaNotFound";
     	}
     }
     
@@ -317,7 +322,6 @@ public class PendudukController
 
     	return "success-update-keluarga";
     }
-<<<<<<< HEAD
     
     
     @RequestMapping("/penduduk/cari")
@@ -357,7 +361,28 @@ public class PendudukController
     	}
     }
     
-    
-=======
->>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
+    @RequestMapping(value="/penduduk/mati", method = RequestMethod.POST)
+    public String matikanPenduduk(Model model,
+    		@RequestParam(value = "nik", required = false) String nik) 
+    {
+    	System.out.println(nik);
+    	
+    	PendudukModel penduduk = pendudukDAO.selectPenduduk (nik); 
+    	
+    	System.out.println(penduduk.getIs_wafat());
+    	
+    	KeluargaModel keluarga = pendudukDAO.selectKeluargaId(penduduk.getId_keluarga());
+        KelurahanModel kelurahan = pendudukDAO.selectKelurahanId(keluarga.getId_kelurahan());
+        KecamatanModel kecamatan = pendudukDAO.selectKecamatanId(kelurahan.getId_kecamatan());
+        KotaModel kota = pendudukDAO.selectKotaId(kecamatan.getId_kota());
+        pendudukDAO.updateKematianPenduduk(penduduk);
+    	
+        model.addAttribute("penduduk", penduduk);
+        model.addAttribute("keluarga", keluarga);
+        model.addAttribute("kelurahan", kelurahan);
+        model.addAttribute("kecamatan", kecamatan);
+        model.addAttribute("kota", kota);
+    	
+        return "redirect:/penduduk/view?nik=" + nik; 
+    }
 }

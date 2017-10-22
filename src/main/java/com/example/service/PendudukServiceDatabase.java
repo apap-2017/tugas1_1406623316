@@ -2,10 +2,8 @@ package com.example.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-<<<<<<< HEAD
+import java.util.Iterator;
 import java.util.List;
-=======
->>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -204,7 +202,6 @@ public class PendudukServiceDatabase implements PendudukService {
 		pendudukMapper.updateKeluarga(keluarga2);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public List<KeluargaModel> setKeluarga(KelurahanModel kelurahan) {
 		// TODO Auto-generated method stub
@@ -224,7 +221,31 @@ public class PendudukServiceDatabase implements PendudukService {
 		return penduduks;
 	}
 
-=======
->>>>>>> 509a3bd1340f626c793b0e2b3c7dd69929753307
-	
+	@Override
+	public void updateKematianPenduduk(PendudukModel penduduk) {
+		// TODO Auto-generated method stub
+		pendudukMapper.updateKematianPenduduk(penduduk);
+	}
+
+	@Override
+	public List<PendudukModel> cekIsTidakBerlaku(List<PendudukModel> penduduks) {
+		// TODO Auto-generated method stub
+		Iterator<PendudukModel> i = penduduks.iterator();
+		while (i.hasNext()) {
+			PendudukModel s = i.next(); // must be called before you can call i.remove()
+			// Do something
+			if(s.getIs_wafat() == 1) {
+				i.remove();
+			}
+		}
+//		for(int i = 0; i < penduduks.size(); i++) {
+//			System.out.println(penduduks.get(i-1).getNama());
+//			if (penduduks.get(i).getIs_wafat() == 1) {
+//				System.out.println(penduduks.get(i-1).getNama());
+//				penduduks.remove(i);
+//			}
+//		}
+		return penduduks;
+	}
+
 }
